@@ -1,30 +1,32 @@
 package jpa01.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Data
+@NoArgsConstructor
+@ToString
+@Setter
+@Getter
 @Entity                         // JPA 에게 이 객체가 데이터를 쓰기위한 객체임을 표시
 @Table(name = "customer_tb")    // 어떤 테이블에 데이터를 넣을지 표시
 public class Customer {
 
-    @Id     // PK 표시
-    private String id;
+    @Id // PK 표시
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
 
     private long registerDate;
 
-    public Customer (String id, String name) {
+    public Customer (Long id, String name) {
         this.id = id;
         this.name = name;
         this.registerDate = System.currentTimeMillis();
     }
 
         public static Customer sample (){
-            return new Customer ( "ID0001", "Kim");
+            return new Customer ( 19L, "Kim");
     }
 
 }
